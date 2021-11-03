@@ -1,6 +1,7 @@
 import 'package:location/location.dart';
 
 // 함수명 앞에 _ 붙이면 외부에서 접근이 불가능하다.
+// 여기서 외부의 의미는 다른 파일을 의미한다.
 // Future<void> _getLocation() async {
 Future<List<double>> getLocation() async {
   bool _serviceEnabled;

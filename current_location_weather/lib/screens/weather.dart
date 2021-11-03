@@ -43,7 +43,6 @@ class Weather extends StatelessWidget {
     List<String> weatherIcons = ["flash", "drop", "snow", "cloud", "sunny"];
     String weatherIcon = weatherIcons[idx];
 
-
     return Padding(
       padding: EdgeInsets.only(top: height * 0.1),
       // https://www.youtube.com/watch?v=apPH1CCOtKQ
