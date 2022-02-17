@@ -40,7 +40,6 @@ class DBHelper {
 
   Future<dynamic> insertBackground(String background) async {
     final data = await _database;
-    print("insertBackground");
     // return await data.insert(
     //   'settings',
     //   settings.toMap(),
@@ -54,14 +53,12 @@ class DBHelper {
 
   Future getBackground() async {
     final data = await _database;
-    print("getBackground");
 
     return await data.rawQuery('SELECT * FROM settings');
   }
 
   Future deleteBackground() async {
     final data = await _database;
-    print("deleteBackground");
 
     return await data.rawQuery(
       'DELETE FROM settings'
