@@ -1,5 +1,21 @@
 # weather5
 
+### 개요
+
+위치 기반으로 현재 날씨를 나타낼 수 있고, 사진첩의 이미지를 배경화면으로 설정할 수 있는 날씨 앱
+
+<br>
+
+### location
+
+Flutter의 Location 플러그인에서 제공해주는 위치 정보 조회에 대한 권한 설정 코드는 갤럭시 S8에서는 잘 동작했으나 S10에서 제대로 동작하지 않았다.
+
+S10에서는 권한 허용 창이 뜨지 않아서 위치를 받아오지 못하는 문제가 발생했다. AndroidManifest 쪽의 설정 문제인가 생각을 처음에 했으나 이 부분에 대한 수정으로는 해결 되지 않았다.
+
+그래서 permission_handler 플러그인에서 제공하는 권한 설정 코드로 변환해서 해결할 수 있었다.
+
+<br>
+
 ### SQFlite
 
 에러가 엄청나게 발생했다.
@@ -46,9 +62,23 @@ VS Code로 작업을 진행하다가 VS Code 에서는 device file 에 접근하
   }
 ```
 
+<br>
 
+### SharedPreference
+
+SQFlite 처럼 기기 내부에 데이터를 저장할 수 있다. 
+
+SQFlite 같은 RDBMS가 아니라서 key, value 형태로만 저장할 수 있는 차이가 있다.
+
+key, value 형태로 관리하다 보니 DB 보다 간편하게 데이터를 조회하고 저장할 수 있다.
+
+SQFlite 에서는 이미지가 약 2.5MB를 넘어가니 저장이 되지 않아서 SharedPreference로 저장을 시도하니 저장됐다. 물론 저장할 때 이미지 자체를 저장하는 것은 아니다.
+
+이미지를 담은 File 객체를 byte 형태로 변환(File 클래스의 readAsByteSync 메서드 이용)하고 이를 다시 base64String으로 변환한 문자열 정보를 저장한다.
 
 <br>
+
+참고
 
 https://docs.flutter.dev/cookbook/persistence/sqlite
 

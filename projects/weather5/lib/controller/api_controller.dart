@@ -47,7 +47,6 @@ class ApiController extends GetxController{
     
     prefs = await SharedPreferences.getInstance();
     imgPath = prefs.getString('imgPath') ?? '';
-    print(imgPath);
     if (imgPath.isEmpty) {
       uint8ListImage.value = [0];
       isDefault.value = true;
