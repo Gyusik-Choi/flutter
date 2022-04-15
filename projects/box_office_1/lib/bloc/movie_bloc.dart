@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:box_office_1/model/movie.dart';
 import 'package:box_office_1/repository/movie_api.dart';
 
 class MovieBloc {
@@ -11,7 +12,8 @@ class MovieBloc {
   Stream get movies => _controller.stream;
 
   Future<void> getMovies() async {
-    await movieAPI.getMovies();
+    List<Movie> movies = await movieAPI.getMovies();
+    _controller.add(movies);
   }
 
   void dispose() {
