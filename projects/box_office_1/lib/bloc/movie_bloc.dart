@@ -14,7 +14,6 @@ class MovieBloc {
   Future<void> getMovies() async {
     List<Movie> movies = await movieAPI.getMovies();
     _controller.add(movies);
-    print(movies);
   }
 
   void dispose() {

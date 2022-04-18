@@ -11,10 +11,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double width = size.width;
-    double height= size.height;
-
     final ScrollController scrollController = ScrollController();
     final movieBloc = MovieProvider.of(context);
     // getMovies 함수는 API 데이터를 받아와서 비동기로 동작하게 된다
