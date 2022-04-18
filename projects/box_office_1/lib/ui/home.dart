@@ -11,6 +11,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double width = size.width;
+    double height= size.height;
+
+    final ScrollController scrollController = ScrollController();
     final movieBloc = MovieProvider.of(context);
     // getMovies 함수는 API 데이터를 받아와서 비동기로 동작하게 된다
     // 그래서 이 함수의 동작이 완료되기 전에 위젯들이 그려진다
@@ -27,24 +32,30 @@ class _HomeState extends State<Home> {
                 StreamBuilder(
                   stream: movieBloc.movies,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    print(snapshot);
+                    
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     }
 
                     return ListView.builder(
+                      // https://github.com/flutter/flutter/issues/80794
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: scrollController,
+                      scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int idx) {
                         String image = snapshot.data[idx].image;
                         String title = snapshot.data[idx].title;
                         int rank = snapshot.data[idx].rank;
-
+                    
                         return Card(
                           child: ListTile(
-                            leading: Image.network(image),
-                            trailing: Text(title),
+                            leading: Image.network(
+                              image,
+                            ),
                             title: Text(rank.toString()),
+                            subtitle: Text(title),
                           )
                         );
                       }
