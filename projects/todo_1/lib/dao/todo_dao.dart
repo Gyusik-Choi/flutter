@@ -20,7 +20,7 @@ class TodoDao {
     }
   }
 
-  Future<dynamic> getTodos(List<String>? columns, String? query) async {
+  Future<dynamic> getTodos({List<String>? columns, String? query}) async {
     Database db = await dbProvider.database;
 
     List<Map<String, dynamic>> result = [];
