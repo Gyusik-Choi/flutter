@@ -1,10 +1,26 @@
 import 'dart:io';
-
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseProvider {
   late Database _database;
+
+  static final DatabaseProvider _databaseProvider = DatabaseProvider._internal();
+  DatabaseProvider._internal();
+
+  factory DatabaseProvider() => _databaseProvider;
+
+  Future<void> openDB() async {
+    String databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'todo.db');
+
+    _database = await openDatabase(
+      path,
+      version: 1,
+      onCreate: initDB,
+      onUpgrade: onUpgrade,
+    );
+  }
 
   Future<Database> get database async {
     if (_database != null) {
@@ -17,7 +33,6 @@ class DatabaseProvider {
 
   Future<Database> createDatabase() async {
     String databasePath = await getDatabasesPath();
-    print(databasePath.runtimeType);
     String path = join(databasePath, 'todo.db');
 
     Database database = await openDatabase(
@@ -32,7 +47,7 @@ class DatabaseProvider {
 
   Future<void> initDB(Database db, int version) async {
     await db.execute(
-      'CREATE TABLE todo'
+      'CREATE TABLE Todo'
       '('
         'id INTEGER PRIMARY KEY AUTOINCREMENT, '
         'description TEXT, '
