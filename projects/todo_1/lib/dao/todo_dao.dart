@@ -48,4 +48,20 @@ class TodoDao {
 
     return [];
   }
+
+
+  Future<dynamic> deleteTodo(int id) async {
+    Database db = await dbProvider.database;
+
+    try {
+      int result = await db.delete(
+        'Todo',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return result;
+    } catch (e) {
+      return e;
+    }
+  }
 }
