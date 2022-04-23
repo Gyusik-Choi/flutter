@@ -27,12 +27,16 @@ class TodoDao {
 
     if (query != null) {
       if (query.isNotEmpty) {
-        result = await db.query(
-          'Todo',
-          columns: columns,
-          where: 'description LIKE ?',
-          whereArgs: ["%$query%"]
-        );
+        try {
+          result = await db.query(
+            'Todo',
+            columns: columns,
+            where: 'description LIKE ?',
+            whereArgs: ["%$query%"]
+          );
+        } catch (e) {
+          return e;
+        }
       }
     } else {
       result = await db.query('Todo', columns: columns);
