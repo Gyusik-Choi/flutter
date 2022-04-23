@@ -13,7 +13,6 @@ class TodoDao {
         'Todo',
         todo.toMap()
       );
-
       return result;
     } catch (e) {
       return e;
