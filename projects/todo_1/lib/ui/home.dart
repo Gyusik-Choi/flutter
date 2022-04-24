@@ -69,7 +69,7 @@ class Home extends StatelessWidget {
                 delete Todo item by ID whenever
                 the card is dismissed
                 */
-                // _todoBloc.deleteTodoById(todo.id);
+                _todoBloc.deleteTodoById(todo.id ?? 0);
               },
               direction: _dismissDirection,
               key: ObjectKey(todo),

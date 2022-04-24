@@ -6,4 +6,5 @@ class TodoRepository {
 
   Future<dynamic> getAllTodos({String? query}) => todoDao.getTodos(query: query);
   Future<dynamic> insertTodo(Todo todo) => todoDao.createTodo(todo);
+  Future<dynamic> deleteTodoById(int id) => todoDao.deleteTodo(id);
 }

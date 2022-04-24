@@ -12,10 +12,14 @@ class TodoBloc {
   Future<void> getTodos({String? query}) async {
     List<dynamic> todos = await _todoRepository.getAllTodos(query: query);
     _controller.sink.add(todos);
-    print(todos);
   }
 
   Future<void> insertTodo(Todo todo) async {
     await _todoRepository.insertTodo(todo);
+  }
+
+  Future<void> deleteTodoById(int id) async {
+   await _todoRepository.deleteTodoById(id);
+   await getTodos();
   }
 }
