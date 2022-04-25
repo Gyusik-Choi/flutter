@@ -10,7 +10,7 @@ class Todo {
   Todo.fromJson(Map<String, dynamic> json)
     : id = json['id'],
       description = json['description'],
-      isDone = json['isDone'] == 0 ? false : true;
+      isDone = json['is_done'] == 0 ? false : true;
 
   // https://power-of-optimism.tistory.com/85
   // db에 넣기 위해 Map 객체로 변환

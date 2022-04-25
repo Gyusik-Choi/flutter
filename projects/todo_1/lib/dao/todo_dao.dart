@@ -42,7 +42,11 @@ class TodoDao {
     }
 
     if (result.isNotEmpty) {
+      print('todo_dao');
+      print(result);
       List<Todo> todos = result.map((item) => Todo.fromJson(item)).toList();
+      print('todo_dao after fromJson');
+      print(todos[0].isDone);
       return todos;
     }
 
