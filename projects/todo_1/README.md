@@ -16,7 +16,13 @@ Exception in thread "main" java.net.UnknownHostException: services.gradle.org
 
 <br>
 
+### 개발 중 이슈
 
+#### update 안 되는 현상 발생
+
+todo 아이템의 네모 상자 혹은 체크 표시를 누르면 상태가 변해야 하는데, 그러지 못하는 현상이 발생했다.
+
+한참을 디버깅 하고나서 원인을 찾았다. db에서 가져온 객체를 map으로 변환할때 컬럼에 오타가 있었다. is_done을 isDone으로 해놔서 계속해서 값이 바뀌지 않았다.
 
 <br>
 

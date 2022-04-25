@@ -6,7 +6,7 @@ class Todo {
   Todo({this.id, this.description, this.isDone = false});
 
   // https://docs.flutter.dev/development/data-and-backend/json
-  // db에서 가져온 값을 Todo 객체로 변환
+  // db 에서 가져온 값을 Todo 객체로 변환
   Todo.fromJson(Map<String, dynamic> json)
     : id = json['id'],
       description = json['description'],
