@@ -49,6 +49,23 @@ class TodoDao {
     return [];
   }
 
+  Future<dynamic> updateTodo(Todo todo) async {
+    Database db = await dbProvider.database;
+
+    try {
+      int result = await db.update(
+        'Todo',
+        todo.toMap(),
+        where: "id = ?",
+        whereArgs: [todo.id],
+      );
+
+      return result;
+    } catch (e) {
+      return e;
+    }
+
+  }
 
   Future<dynamic> deleteTodo(int id) async {
     Database db = await dbProvider.database;

@@ -16,6 +16,12 @@ class TodoBloc {
 
   Future<void> insertTodo(Todo todo) async {
     await _todoRepository.insertTodo(todo);
+    await getTodos();
+  }
+
+  Future<void> updateTodo(Todo todo) async {
+    await _todoRepository.updateTodo(todo);
+    await getTodos();
   }
 
   Future<void> deleteTodoById(int id) async {
