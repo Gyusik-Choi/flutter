@@ -39,41 +39,43 @@ class Home extends StatelessWidget {
   Widget getTodosWidget() {
     return StreamBuilder(
       stream: _todoBloc.todos,
-      builder: (BuildContext context, AsyncSnapshot snapShot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Todo>> snapShot) {
         if (snapShot.hasData == false) {
           return const Center(
             child: Text('No Todos'),
           );
         }
-
-        return ListView.builder(
-          itemCount: snapShot.data.length,
-          itemBuilder: (context, itemPosition) {
-            Todo todo = snapShot.data[itemPosition];
-            final Widget dismissibleCard = Dismissible(
-              background: Container(
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Deleting",
-                      style: TextStyle(color: Colors.white),
+        print('stream builder');
+        print(snapShot.data![0].isDone);
+        return snapShot.data!.isNotEmpty
+          ? ListView.builder(
+            itemCount: snapShot.data?.length,
+            itemBuilder: (context, itemPosition) {
+              Todo todo = snapShot.data![itemPosition];
+              final Widget dismissibleCard = Dismissible(
+                background: Container(
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Deleting",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
+                  color: Colors.redAccent,
                 ),
-                color: Colors.redAccent,
-              ),
-              onDismissed: (direction) {
-                /*The magic
-                delete Todo item by ID whenever
-                the card is dismissed
-                */
-                _todoBloc.deleteTodoById(todo.id ?? 0);
-              },
-              direction: _dismissDirection,
-              key: ObjectKey(todo),
-              child: Card(
+                onDismissed: (direction) {
+                  /*The magic
+                  delete Todo item by ID whenever
+                  the card is dismissed
+                  */
+                  _todoBloc.deleteTodoById(todo.id ?? 0);
+                },
+                direction: _dismissDirection,
+                key: ObjectKey(todo),
+                child: Card(
                   shape: RoundedRectangleBorder(
                     side: const BorderSide(
                       color: Colors.grey, 
@@ -84,15 +86,20 @@ class Home extends StatelessWidget {
                   color: Colors.white,
                   child: ListTile(
                     leading: InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        print('onTap');
+                        print(todo.isDone);
                         //Reverse the value
-                        // todo.isDone = !todo.isDone;
+                        todo.isDone = !todo.isDone;
+                        print(todo.isDone);
                       /*
                         Another magic.
                         This will update Todo isDone with either
                         completed or not
                       */
-                        // _todoBloc.updateTodo(todo);
+                        await _todoBloc.updateTodo(todo);
+                        print('home');
+                        print(todo.isDone);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -120,10 +127,17 @@ class Home extends StatelessWidget {
                           : TextDecoration.none
                       ),
                     ),
-                  )),
-            );
-            return dismissibleCard;
-          },
+                  )  
+                ),
+              );
+              return dismissibleCard;
+            },
+          )
+        : const Center(
+          child: Text(
+            "Start adding Todo...",
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+          ),
         );
       }
     );

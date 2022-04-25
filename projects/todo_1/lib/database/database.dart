@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -23,11 +22,6 @@ class DatabaseProvider {
   }
 
   Future<Database> get database async {
-    if (_database != null) {
-      return _database;
-    }
-
-    _database = await createDatabase();
     return _database;
   }
 

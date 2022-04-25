@@ -51,7 +51,8 @@ class TodoDao {
 
   Future<dynamic> updateTodo(Todo todo) async {
     Database db = await dbProvider.database;
-
+    print('updateTodo');
+    print(todo.isDone);
     try {
       int result = await db.update(
         'Todo',

@@ -5,7 +5,7 @@ import 'package:todo_1/repository/todo_repository.dart';
 
 class TodoBloc {
   final TodoRepository _todoRepository = TodoRepository();
-  final StreamController _controller = StreamController.broadcast();
+  final StreamController _controller = StreamController<List<Todo>>.broadcast();
 
   get todos => _controller.stream;
 
@@ -20,6 +20,8 @@ class TodoBloc {
   }
 
   Future<void> updateTodo(Todo todo) async {
+    print('todo_bloc');
+    print(todo.isDone);
     await _todoRepository.updateTodo(todo);
     await getTodos();
   }
