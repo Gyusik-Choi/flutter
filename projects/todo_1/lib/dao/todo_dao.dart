@@ -42,11 +42,7 @@ class TodoDao {
     }
 
     if (result.isNotEmpty) {
-      print('todo_dao');
-      print(result);
       List<Todo> todos = result.map((item) => Todo.fromJson(item)).toList();
-      print('todo_dao after fromJson');
-      print(todos[0].isDone);
       return todos;
     }
 
@@ -55,8 +51,7 @@ class TodoDao {
 
   Future<dynamic> updateTodo(Todo todo) async {
     Database db = await dbProvider.database;
-    print('updateTodo');
-    print(todo.isDone);
+    
     try {
       int result = await db.update(
         'Todo',

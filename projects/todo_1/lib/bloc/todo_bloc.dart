@@ -20,8 +20,6 @@ class TodoBloc {
   }
 
   Future<void> updateTodo(Todo todo) async {
-    print('todo_bloc');
-    print(todo.isDone);
     await _todoRepository.updateTodo(todo);
     await getTodos();
   }

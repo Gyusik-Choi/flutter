@@ -45,8 +45,7 @@ class Home extends StatelessWidget {
             child: Text('No Todos'),
           );
         }
-        print('stream builder');
-        print(snapShot.data![0].isDone);
+
         return snapShot.data!.isNotEmpty
           ? ListView.builder(
             itemCount: snapShot.data?.length,
@@ -67,10 +66,6 @@ class Home extends StatelessWidget {
                   color: Colors.redAccent,
                 ),
                 onDismissed: (direction) {
-                  /*The magic
-                  delete Todo item by ID whenever
-                  the card is dismissed
-                  */
                   _todoBloc.deleteTodoById(todo.id ?? 0);
                 },
                 direction: _dismissDirection,
@@ -87,19 +82,8 @@ class Home extends StatelessWidget {
                   child: ListTile(
                     leading: InkWell(
                       onTap: () async {
-                        print('onTap');
-                        print(todo.isDone);
-                        //Reverse the value
                         todo.isDone = !todo.isDone;
-                        print(todo.isDone);
-                      /*
-                        Another magic.
-                        This will update Todo isDone with either
-                        completed or not
-                      */
                         await _todoBloc.updateTodo(todo);
-                        print('home');
-                        print(todo.isDone);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -219,11 +203,6 @@ class Home extends StatelessWidget {
                                 );
                                 
                                 if (newTodo.description != null) {
-                                  /*Create new Todo object and make sure
-                                  the Todo description is not empty,
-                                  because what's the point of saving empty
-                                  Todo
-                                  */
                                   _todoBloc.insertTodo(newTodo);
 
                                   //dismisses the bottomsheet
