@@ -1,9 +1,9 @@
 class Todo {
-  int id;
+  int? id;
   String description;
   bool isDone;
 
-  Todo({required this.id, required this.description, this.isDone = false});
+  Todo({this.id, required this.description, this.isDone = false});
 
   Todo.fromMap(Map<String, dynamic> itemFromDB)
     : id = itemFromDB['id'],
