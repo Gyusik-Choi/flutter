@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../bloc/todo_bloc.dart';
 import '../model/todo.dart';
 

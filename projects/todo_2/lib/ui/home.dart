@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_2/bloc/todo_bloc.dart';
 
+import 'add_todo.dart';
 import 'get_todos.dart';
 
 class Home extends StatelessWidget {
@@ -12,7 +13,19 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // https://nurozkaya.medium.com/keyboard-pushes-the-content-up-resizes-the-screen-problem-in-flutter-59188a19324a
+        resizeToAvoidBottomInset: false,
         body: getTodos(_todoBloc),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await addTodo(context);
+          },
+          backgroundColor: Colors.white,
+          child: const Icon(
+            Icons.add,
+            color: Colors.indigoAccent,
+          )
+        ),
       )
     );
   }
