@@ -4,7 +4,7 @@ import 'package:todo_2/repository/todo_repository.dart';
 
 class TodoBloc {
   final TodoRepository _todoRepository = TodoRepository();
-  final StreamController _todoController = StreamController();
+  final StreamController _todoController = StreamController<List<dynamic>>();
 
   get todos {
     return _todoController.stream;
