@@ -18,6 +18,7 @@ class TodoDao {
       }
 
       List<Todo> todos = result.map((item) => Todo.fromMap(item)).toList();
+
       return [null, todos];
     } catch (err) {
       return [err, null];
@@ -33,9 +34,9 @@ class TodoDao {
         todo.toMap(),
       );
 
-      return result;
+      return [null, result];
     } catch (err) {
-      return err;
+      return [err, null];
     }
   }
 

@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
         body: getTodos(_todoBloc),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            await addTodo(context);
+            await addTodo(context, _todoBloc);
           },
           backgroundColor: Colors.white,
           child: const Icon(
