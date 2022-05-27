@@ -8,7 +8,8 @@ class Todo {
   Todo.fromMap(Map<String, dynamic> itemFromDB)
     : id = itemFromDB['id'],
       description = itemFromDB['description'],
-      isDone = itemFromDB['isDone'];
+      isDone = itemFromDB['is_done'] == 0 ? false : true;
+      // isDone = itemFromDB['is_done'];
 
   Map<String, dynamic> toMap() {
     return {
