@@ -15,26 +15,40 @@ Widget getTodos(TodoBloc bloc) {
               bool isDone = todo.isDone;
               String description = todo.description;
 
-              return Card(
-                child: ListTile(
-                  leading: isDone
-                    ? const Icon(
-                        Icons.done,
-                        color: Colors.indigoAccent,
+              return Dismissible(
+                key: ObjectKey(todo.id),
+                direction: DismissDirection.endToStart,
+                background: const Card(
+                  color: Colors.blue,
+                  child: ListTile(),
+                ),
+                onDismissed: (direction) {
+
+                },
+                confirmDismiss: (direction) async {
+                  return true;
+                },
+                child: Card(
+                  child: ListTile(
+                    leading: isDone
+                      ? const Icon(
+                          Icons.done,
+                          color: Colors.indigoAccent,
+                        )
+                      : const Icon(
+                          Icons.check_box_outline_blank,
+                          color: Colors.tealAccent,
+                        ),
+                    title: Text(
+                      description,
+                      style: TextStyle(
+                        decoration: isDone
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
                       )
-                    : const Icon(
-                        Icons.check_box_outline_blank,
-                        color: Colors.tealAccent,
-                      ),
-                  title: Text(
-                    description,
-                    style: TextStyle(
-                      decoration: isDone
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none,
-                    )
-                  ),
-                )
+                    ),
+                  )
+                ),
               );
             },
           );
