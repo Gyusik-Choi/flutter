@@ -15,6 +15,20 @@ class Home extends StatelessWidget {
       child: Scaffold(
         // https://nurozkaya.medium.com/keyboard-pushes-the-content-up-resizes-the-screen-problem-in-flutter-59188a19324a
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.toggle_off,
+              ),
+              onPressed: () {
+
+              },
+            )
+          ],
+        ),
         body: getTodos(_todoBloc),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
