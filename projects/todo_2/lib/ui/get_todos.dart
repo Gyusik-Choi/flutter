@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../bloc/todo_bloc.dart';
 import '../model/todo.dart';
+import 'dialog.dart';
 
 Widget getTodos(TodoBloc bloc) {
   return StreamBuilder(
@@ -12,6 +13,7 @@ Widget getTodos(TodoBloc bloc) {
             itemCount: snapshot.data!.length,
             itemBuilder: (BuildContext context, int index) {
               Todo todo = snapshot.data![index];
+              int id = todo.id!;
               bool isDone = todo.isDone;
               String description = todo.description;
 
@@ -20,13 +22,21 @@ Widget getTodos(TodoBloc bloc) {
                 direction: DismissDirection.endToStart,
                 background: const Card(
                   color: Colors.blue,
-                  child: ListTile(),
+                  child: ListTile(
+                    title: Text(
+                      '삭제',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )
+                  ),
                 ),
                 onDismissed: (direction) {
-
+                  bloc.deleteTodo(id);
                 },
                 confirmDismiss: (direction) async {
-                  return true;
+                  return await dialog(context);
                 },
                 child: Card(
                   child: ListTile(
