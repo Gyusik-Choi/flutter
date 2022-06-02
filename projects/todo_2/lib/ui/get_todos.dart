@@ -40,15 +40,21 @@ Widget getTodos(TodoBloc bloc) {
                 },
                 child: Card(
                   child: ListTile(
-                    leading: isDone
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.indigoAccent,
-                        )
-                      : const Icon(
-                          Icons.check_box_outline_blank,
-                          color: Colors.tealAccent,
-                        ),
+                    leading: IconButton(
+                      icon: isDone
+                        ? const Icon(
+                            Icons.done,
+                            color: Colors.indigoAccent,
+                          )
+                        : const Icon(
+                            Icons.check_box_outline_blank,
+                            color: Colors.tealAccent,
+                          ),
+                      onPressed: () {
+                        todo.isDone = !todo.isDone;
+                        bloc.updateTodo(todo);
+                      },
+                    ),
                     title: Text(
                       description,
                       style: TextStyle(

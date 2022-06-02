@@ -18,16 +18,6 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.toggle_off,
-              ),
-              onPressed: () {
-
-              },
-            )
-          ],
         ),
         body: getTodos(_todoBloc),
         floatingActionButton: FloatingActionButton(
