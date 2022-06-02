@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_2/ui/dialog.dart';
 import '../bloc/todo_bloc.dart';
 import '../model/todo.dart';
 
@@ -65,7 +66,7 @@ Future addTodo(BuildContext context, TodoBloc _bloc) {
                             Icons.save,
                             color: Colors.white,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             String words = _controller.value.text;
 
                             if (words.isNotEmpty) {
@@ -73,7 +74,12 @@ Future addTodo(BuildContext context, TodoBloc _bloc) {
                                 description: words,
                               );
 
-                              _bloc.addTodo(newTodo);
+                              bool result = await _bloc.addTodo(newTodo);
+
+                              if (result == false) {
+                                await serverErrorDialog(context);
+                              }
+
                               Navigator.of(context).pop();
                             }
                           },

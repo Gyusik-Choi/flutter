@@ -32,11 +32,15 @@ Widget getTodos(TodoBloc bloc) {
                     )
                   ),
                 ),
-                onDismissed: (direction) {
-                  bloc.deleteTodo(id);
+                onDismissed: (direction) async {
+                  bool result = await bloc.deleteTodo(id);
+
+                  if (result == false) {
+                    return await serverErrorDialog(context);
+                  }
                 },
                 confirmDismiss: (direction) async {
-                  return await dialog(context);
+                  return await deleteDialog(context);
                 },
                 child: Card(
                   child: ListTile(
@@ -50,9 +54,13 @@ Widget getTodos(TodoBloc bloc) {
                             Icons.check_box_outline_blank,
                             color: Colors.tealAccent,
                           ),
-                      onPressed: () {
+                      onPressed: () async {
                         todo.isDone = !todo.isDone;
-                        bloc.updateTodo(todo);
+                        bool result = await bloc.updateTodo(todo);
+
+                        if (result == false) {
+                          return await serverErrorDialog(context);
+                        }
                       },
                     ),
                     title: Text(

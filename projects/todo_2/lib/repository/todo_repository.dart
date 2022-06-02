@@ -8,7 +8,7 @@ class TodoRepository {
     return await _todoDao.getAllTodos();
   }
 
-  Future<void> insertTodo(Todo todo) async {
+  Future<List<dynamic>> insertTodo(Todo todo) async {
     return await _todoDao.createTodo(todo);
   }
 

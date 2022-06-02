@@ -10,36 +10,46 @@ class TodoBloc {
     return _todoController.stream;
   }
 
-  Future<void> getAllTodos() async {
+  Future<bool> getAllTodos() async {
     List<dynamic> getAllTodosResult = await _todoRepository.getAllTodos();
 
     if (getAllTodosResult[1] == null) {
       // 서버 에러
+      return false;
     }
 
     _todoController.sink.add(getAllTodosResult[1]);
+    return true;
   }
 
-  Future<void> addTodo(Todo todo) async {
-    await _todoRepository.insertTodo(todo);
+  Future<dynamic> addTodo(Todo todo) async {
+    List<dynamic> insertTodoResult = await _todoRepository.insertTodo(todo);
+
+    if (insertTodoResult[1] == null) {
+      // 서버 에
+      return false;
+    }
+
     await getAllTodos();
   }
 
-  Future<void> updateTodo(Todo todo) async {
+  Future<dynamic> updateTodo(Todo todo) async {
     List<dynamic> updateTodoResult = await _todoRepository.updateTodo(todo);
 
     if (updateTodoResult[1] == null) {
       // 서버 에러
+      return false;
     }
 
     await getAllTodos();
   }
 
-  Future<void> deleteTodo(int id) async {
+  Future<dynamic> deleteTodo(int id) async {
     List<dynamic> deleteTodoResult = await _todoRepository.deleteTodo(id);
 
     if (deleteTodoResult[1] == null) {
       // 서버 에러
+      return false;
     }
 
     await getAllTodos();
