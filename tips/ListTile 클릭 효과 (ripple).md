@@ -43,3 +43,9 @@ Container(
 )
 ```
 
+<br>
+
+<참고>
+
+https://stackoverflow.com/questions/69073736/is-it-possible-to-set-a-border-for-listtile-flutter
+
