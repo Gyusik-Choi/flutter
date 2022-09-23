@@ -1,16 +1,13 @@
 # bus1
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<br>
 
-A few resources to get you started if this is your first Flutter project:
+<참고>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+https://senticoding.tistory.com/25
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000193
+
+https://www.data.go.kr/data/15080662/openapi.do
