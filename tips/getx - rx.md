@@ -126,7 +126,11 @@ Rx< T > 변수는 Rx 를 제거하고 T 만 남길 수 있다.
 <br>
 
 ```dart
-
+class Person {
+  String name;
+  
+  Person(this.name);
+}
 ```
 
 <br>
